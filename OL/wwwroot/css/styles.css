@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+}
+/* Set height of body and the document to 100% */
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+}
+#add-book label {
+  display: block;
+}
+input {
+  color: black!important;
+}
+input:not([type="submit"]):not([type="checkbox"]) {
+  width: 100%;
+}
+/* Style tab links */
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 50%;
+}
+.tablink:hover {
+  background-color: #777;
+}
+/* Style the tab content (and add height:100% for full page content) */
+.content {
+  color: white;
+  padding: 100px 20px;
+  height: 100%;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+table tr:nth-child(even) {
+  background-color: #516b58;
+}
+table tr:hover {
+  background-color: #ddd;
+}
+#Books,
+#Authors {
+  background-color: #336130e0;
+}
+table {
+  width: 100%;
+}
+table thead th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #af4c4c;
+  color: white;
+}
+table td,
+table th {
+  border: 0.2px solid #ddd;
+  padding: 8px;
+}
+span.multiselect-native-select {
+  display: block;
+}
+input[type=submit] {
+  float: right;
+  margin-top: 1em;
+  color: black;
+  font-size: 17px;
+}

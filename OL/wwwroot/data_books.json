@@ -1,0 +1,45 @@
+[
+  {
+    "name": "book1",
+    "year": 2002,
+    "price": 35.00,
+    "nickname": "mark1"
+  },
+  {
+    "name": "book2",
+    "year": 2002,
+    "price": 35.00,
+    "nickname": "mark1"
+  },
+  {
+    "name": "book3",
+    "year": 2002,
+    "price": 35.00,
+    "nickname": "mark2"
+  },
+  {
+    "name": "book4",
+    "year": 2002,
+    "price": 35.00,
+    "nickname": [ "mark3", "mark2" ]
+  },
+  {
+    "name": "book5",
+    "year": 2002,
+    "price": 35.00,
+    "nickname": "mark3"
+  },
+  {
+    "name": "book6",
+    "year": 2002,
+    "price": 35.00,
+    "nickname": "mark1"
+  },
+  {
+    "name": "book7",
+    "year": 2002,
+    "price": 35.00,
+    "nickname": "mark7"
+  }
+
+]

@@ -1,0 +1,139 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="~/js/bootstrap-multiselect.js"></script>
+<link rel="stylesheet" href="~/css/bootstrap-multiselect.css" type="text/css" />
+
+<div>
+    <div class="tab">
+        <button class="tablink">Books</button>
+        <button class="tablink">Authors</button>
+    </div>
+
+    <div id="Books" class="content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year</th>
+                    <th>Price</th>
+                    <th>Author nickname</th>
+                    <th>Authors</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div id="add-book">
+            <h3>Add book</h3>
+            <label>Name</label>
+            <input id="name" type="text" />
+            <label>Year</label>
+            <input id="year" type="number" />
+            <label>Price</label>
+            <input id="price" type="number" min="0.0"/>
+            <label>Autors</label>
+            <select multiple="multiple" class="form-control" id="smth"></select>
+            <input id="addBook" type="submit" />
+        </div>
+    </div>
+
+    <div id="Authors" class="content" style="display:none;">
+        <table>
+            <thead>
+                <tr>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Birth yaer</th>
+                    <th>Nickname</th>
+                    <th>Books</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div>
+            <h3>Add author</h3>
+            <label>Nickname</label>
+            <input id="nickname" type="text" />
+            <label>First name</label>
+            <input id="fName" type="text" />
+            <label>Last name</label>
+            <input id="lName" type="text" />
+            <label>Birth date</label>
+            <input id="birthdate" type="date" min="1900-01-01"/>
+            <input id="add-author" type="submit" />
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        //TO DO: make as const
+
+        buildMultiSelect();
+        loadLocalStorage("books", "#Books tbody", "<td><img  style=\"width:3em\" src=\"author.png\"/ onclick=\"showAuthors($(this))\"></td>");
+        loadLocalStorage("authors", "#Authors tbody", "<td><img  style=\"width:3em\" src=\"books.png\"/ onclick=\"showBooks($(this))\"></td>");
+        loadJSONfile("data_books.json", "#Books tbody", "<td><img  style=\"width:3em\" src=\"author.png\"/ onclick=\"showAuthors($(this))\"></td>");
+        loadJSONfile("data_authors.json", "#Authors tbody", "<td><img  style=\"width:3em\" src=\"books.png\"/ onclick=\"showBooks($(this))\"></td>");
+
+       
+        $(".tablink").click(function () {
+            var id = $(this).text();
+
+            $(".content").hide();
+            $("#" + id).show();
+        });
+
+        $("#addBook").click(function () {
+
+            var storedBooks = JSON.parse(localStorage.getItem("books"));
+            if (!storedBooks) {
+                storedBooks = [];
+            }
+            var book = {
+                name: $("input#name").val(),
+                year: $("input#year").val(),
+                price: $("input#price").val(),
+                nickname: $("select").val()
+            };
+
+            var td = "</td><td>"
+            var option = "<img  style=\"width:3em\" src=\"author.png\"/ onclick=\"showAuthors($(this))\"></td></tr>";
+            var bookHTML = "<tr><td>" + book.name + td + book.year + td + book.price + "</td><td id=\"nickname\">" + book.nickname + td + option;
+
+            $(bookHTML).insertBefore("#Books tbody");
+
+            storedBooks.push(book);
+
+            localStorage.setItem("books", JSON.stringify(storedBooks));
+        });
+
+        $("#add-author").click(function () {
+
+            var storedAuthors = JSON.parse(localStorage.getItem("authors"));
+            if (!storedAuthors) {
+                storedAuthors = [];
+            }
+            var author = {
+                fName: $("input#fName").val(),
+                lName: $("input#lName").val(),
+                birthdate: $("input#birthdate").val(),
+                nickname: $("input#nickname").val()
+            };
+
+            var td = "</td><td>"
+            var option = "<img  style=\"width:3em\" src=\"books.png\"/ onclick=\"showBooks($(this))\"></td></tr>";
+            var authorHTML = "<tr><td>" + author.fName + td + author.lName + td + author.birthdate + "</td><td id=\"nickname\">" + author.nickname + td + option;
+
+            $(authorHTML).insertBefore("#Authors tbody");
+
+            storedAuthors.push(author);
+
+            localStorage.setItem("authors", JSON.stringify(storedAuthors));
+            buildMultiSelect();
+        });
+
+    });
+   
+</script>
